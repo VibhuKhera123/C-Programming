@@ -1,42 +1,38 @@
-#include<stdio.h>
-#include<pthread.h>
-#include<unistd.h>
-void *function1();
- void *function2();
- pthread_mutex_t first_mutex;  //mutex lock
- pthread_mutex_t second_mutex;
+#include <stdio.h>
+#include <pthread.h>
 
- int main() {
- pthread_mutex_init(&first_mutex,NULL);  //initialize the lock 
- pthread_mutex_init(&second_mutex,NULL);
- pthread_t one, two;  
- pthread_create(&one, NULL, function1, NULL);  // create thread
- pthread_create(&two, NULL, function2, NULL);
- pthread_join(one, NULL);
- pthread_join(two, NULL);
- printf("Thread joined\n");
- }
+pthread_mutex_t mutex1 = PTHREAD_MUTEX_INITIALIZER;
+pthread_mutex_t mutex2 = PTHREAD_MUTEX_INITIALIZER;
 
- void *function1( ) {
-     pthread_mutex_lock(&first_mutex);  // to acquire the resource/mutex lock
-     printf("Thread ONE acquired first_mutex\n");
-     sleep(1);
-     pthread_mutex_lock(&second_mutex);
-     printf("Thread ONE acquired second_mutex\n");
-     pthread_mutex_unlock(&second_mutex); // to release the resource
-     printf("Thread ONE released second_mutex\n");
-     pthread_mutex_unlock(&first_mutex);
-     printf("Thread ONE released first_mutex\n");
+void *thread1(void *arg) {
+  pthread_mutex_lock(&mutex1);
+  printf("Thread 1 has acquired mutex1\n");
+  pthread_mutex_lock(&mutex2);
+  printf("Thread 1 has acquired mutex2\n");
+  pthread_mutex_unlock(&mutex2);
+  pthread_mutex_unlock(&mutex1);
+  return NULL;
 }
 
-void *function2( ) {
-     pthread_mutex_lock(&second_mutex);
-     printf("Thread TWO acquired second_mutex\n");
-     sleep(1);
-     pthread_mutex_lock(&first_mutex);
-     printf("Thread TWO acquired first_mutex\n");
-     pthread_mutex_unlock(&first_mutex);
-     printf("Thread TWO released first_mutex\n");
-     pthread_mutex_unlock(&second_mutex);
-     printf("Thread TWO released second_mutex\n");
+void *thread2(void *arg) {
+  pthread_mutex_lock(&mutex2);
+  printf("Thread 2 has acquired mutex2\n");
+  pthread_mutex_lock(&mutex1);
+  printf("Thread 2 has acquired mutex1\n");
+  pthread_mutex_unlock(&mutex1);
+  pthread_mutex_unlock(&mutex2);
+  return NULL;
+}
+
+int main() {
+  pthread_t thread1_id;
+  pthread_t thread2_id;
+
+  pthread_create(&thread1_id, NULL, thread1, NULL);
+  pthread_create(&thread2_id, NULL, thread2, NULL);
+
+  pthread_join(thread1_id, NULL);
+  pthread_join(thread2_id, NULL);
+
+  return 0;
 }
