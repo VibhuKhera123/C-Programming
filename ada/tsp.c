@@ -6,7 +6,7 @@ void takeInput()
 {
 int i,j;
  
-printf("Enter the number of cities: ");
+printf("Enter the number of ci7ties: ");
 scanf("%d",&n);
  
 printf("\nEnter the Cost Matrix\n");

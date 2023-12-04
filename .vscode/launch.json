@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "d:/c prog/operating systems",
-      "program": "d:/c prog/operating systems/build/Debug/outDebug",
+      "cwd": "d:/c prog",
+      "program": "d:/c prog/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "C:/MinGW/bin/gdb",
       "setupCommands": [

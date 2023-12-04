@@ -5,7 +5,6 @@ int i,j,np,nr;
 int main()
 {
 int alloc[10][10],request[10][10],avail[10],r[10],w[10];
-
 printf("\nEnter the no of process: ");
 scanf("%d",&np);
 printf("\nEnter the no of resources: ");
@@ -15,16 +14,11 @@ for(i=0;i<nr;i++)
 printf("\nTotal Amount of the Resource R%d: ",i+1);
 scanf("%d",&r[i]);
 }
-
-
-
-
 printf("\nEnter the request matrix:");
 
 for(i=0;i<np;i++)
 for(j=0;j<nr;j++)
 scanf("%d",&request[i][j]);
-
 printf("\nEnter the allocation matrix:");
 for(i=0;i<np;i++)
 for(j=0;j<nr;j++)
@@ -36,7 +30,6 @@ avail[j]=r[j];
 for(i=0;i<np;i++)
 {
 avail[j]-=alloc[i][j];
-
 }
 }
 

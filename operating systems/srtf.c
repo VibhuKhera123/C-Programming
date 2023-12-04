@@ -17,7 +17,7 @@
  
     printf("ENTER THE ARRIVAL TIME OF PROCESS %d:\t", i); 
  
-    scanf("%d", & ari[i]); 
+    scanf("%d", & ari[i]);
  
     printf("ENTER THE BURST TIME OF PROCESS %d:\t", i); 
  

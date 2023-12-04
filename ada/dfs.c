@@ -4,10 +4,10 @@
 #define MAX_NODES 100
 #define INF 9999
 
-int n; // Number of nodes in the graph
-int adjMatrix[MAX_NODES][MAX_NODES]; // Adjacency matrix of the graph
+int n; 
+int adjMatrix[MAX_NODES][MAX_NODES];
 
-int visited[MAX_NODES]; // Array to track visited nodes
+int visited[MAX_NODES];
 
 void createGraph() {
     int i, j;
